@@ -1,0 +1,132 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "Next.js 14",
+    "React 18",
+    "Supabase",
+    "PostgreSQL",
+    "OpenAI",
+    "Framer Motion",
+    "Tailwind CSS"
+  ],
+  "features": [
+    {
+      "name": "Authentication System",
+      "description": "OTP-based authentication using Supabase Auth",
+      "files": [
+        "app/api/auth/send-otp/route.ts",
+        "app/api/auth/verify-otp/route.ts",
+        "app/login/page.tsx",
+        "lib/supabase-server.ts",
+        "lib/supabase.ts"
+      ]
+    },
+    {
+      "name": "Dream Creation",
+      "description": "Create and save dreams with AI analysis",
+      "files": [
+        "app/api/dreams/create/route.ts",
+        "app/api/dreams/route.ts",
+        "app/compose/page.tsx",
+        "lib/dream-analysis.ts",
+        "lib/openai-dream-analysis.ts"
+      ]
+    },
+    {
+      "name": "Dream Feed",
+      "description": "Display list of user's dreams",
+      "files": [
+        "app/feed/page.tsx",
+        "app/api/dreams/route.ts"
+      ]
+    },
+    {
+      "name": "Dream Detail Page",
+      "description": "View individual dream with analysis and video generation",
+      "files": [
+        "app/dream/[id]/page.tsx",
+        "app/api/dreams/route.ts"
+      ]
+    },
+    {
+      "name": "AI Video Generation",
+      "description": "Generate videos from dreams using Runway ML",
+      "files": [
+        "app/api/dreams/generate-video/route.ts",
+        "app/api/dreams/video-status/route.ts",
+        "app/api/webhooks/video-complete/route.ts",
+        "lib/video-provider.ts",
+        "lib/video-providers/runway.ts",
+        "lib/video-prompt-generator.ts"
+      ]
+    },
+    {
+      "name": "Monthly Reports",
+      "description": "Generate monthly wellness reports with AI analysis",
+      "files": [
+        "app/api/reports/monthly/route.ts",
+        "app/api/reports/evolution/route.ts",
+        "app/api/cron/monthly-report/route.ts",
+        "lib/monthly-aggregation.ts",
+        "lib/wellness-analysis.ts",
+        "lib/openai-wellness-analysis.ts"
+      ]
+    },
+    {
+      "name": "Subconscious Theme Detection",
+      "description": "Detect recurring themes in dreams using AI",
+      "files": [
+        "lib/theme-analysis.ts"
+      ]
+    },
+    {
+      "name": "Dream Evolution Timeline",
+      "description": "Track dream evolution across months",
+      "files": [
+        "lib/evolution-analysis.ts",
+        "app/api/reports/evolution/route.ts"
+      ]
+    },
+    {
+      "name": "Dream Archetype System",
+      "description": "Assign archetypes based on dream patterns",
+      "files": [
+        "lib/archetype-analysis.ts"
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "description": "Main dashboard with insights and analytics",
+      "files": [
+        "app/dashboard/page.tsx"
+      ]
+    },
+    {
+      "name": "User Profile",
+      "description": "User profile page",
+      "files": [
+        "app/profile/page.tsx"
+      ]
+    },
+    {
+      "name": "UI Components",
+      "description": "Reusable UI components with animations",
+      "files": [
+        "app/components/Header.tsx",
+        "app/components/Footer.tsx",
+        "app/components/AppShell.tsx",
+        "app/components/LayoutWrapper.tsx",
+        "app/components/PageTransition.tsx"
+      ]
+    },
+    {
+      "name": "Utilities",
+      "description": "Helper functions and utilities",
+      "files": [
+        "lib/utils.ts",
+        "lib/prisma.ts"
+      ]
+    }
+  ]
+}
+

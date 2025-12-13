@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+//
+// Note: Users are handled by Supabase Auth (auth.users)
+// user_id references auth.users(id) but is not a Prisma relation
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Dreams table
+// Note: user_id references Supabase auth.users(id) - external table, no Prisma relation
+model Dream {
+  id         String    @id @default(uuid()) @db.Uuid
+  userId     String    @map("user_id") @db.Uuid
+  dreamText  String    @map("dream_text")
+  emotion    String?
+  style      String?
+  analysis   Json?     @db.JsonB
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("dreams")
+  @@index([userId])
+}
+
+// Monthly mental health reports
+// Note: user_id references Supabase auth.users(id) - external table, no Prisma relation
+model MonthlyReport {
+  id             String    @id @default(uuid()) @db.Uuid
+  userId         String    @map("user_id") @db.Uuid
+  monthYear      String    @map("month_year")
+  mentalState    String?   @map("mental_state")
+  summary        String?
+  patterns       String?
+  recommendation String?
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("monthly_reports")
+  @@index([userId])
+  @@index([monthYear])
+}
+
+
