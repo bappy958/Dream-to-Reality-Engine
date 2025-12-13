@@ -6,15 +6,27 @@
  * Developed by Bappy Ahmmed (itznobita958@gmail.com)
  */
 
-import OpenAI from 'openai'
+// Type definition for OpenAI constructor
+type OpenAIConstructor = new (config: { apiKey: string }) => {
+  // Minimal type definition to avoid requiring the module
+  [key: string]: unknown
+}
+
+let OpenAIClass: OpenAIConstructor | undefined
+try {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  OpenAIClass = require('openai').default || require('openai')
+} catch (error) {
+  OpenAIClass = undefined
+}
 
 const apiKey = process.env.OPENAI_API_KEY
 
-if (!apiKey) {
+if (!OpenAIClass || !apiKey) {
   console.warn('OPENAI_API_KEY not found. AI features will be disabled.')
 }
 
-export const openai = apiKey ? new OpenAI({ apiKey }) : null
+export const openai = apiKey && OpenAIClass ? new OpenAIClass({ apiKey }) : null
 
 /**
  * Check if OpenAI is available
