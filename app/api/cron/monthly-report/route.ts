@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerClient } from '@/lib/supabase'
+import { createAdminClient, createServerClient } from '@/lib/supabase'
 import { generateMonthlyReport, getPreviousMonthYear } from '@/lib/monthly-aggregation'
 
 /**
@@ -25,7 +25,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Use server client for cron operations
+    // Use admin client for cron operations (requires service role key)
+    const adminSupabase = createAdminClient()
+    if (!adminSupabase) {
+      return NextResponse.json(
+        { error: 'Admin client not available. SUPABASE_SERVICE_ROLE_KEY required.' },
+        { status: 500 }
+      )
+    }
+
     const supabase = createServerClient()
     const previousMonth = getPreviousMonthYear()
 

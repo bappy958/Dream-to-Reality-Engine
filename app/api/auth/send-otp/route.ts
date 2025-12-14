@@ -23,11 +23,14 @@ export async function POST(request: NextRequest) {
 
     // Use Supabase Auth to send OTP
     // This sends a magic link/code to the email
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null
+    
     const { data, error } = await supabase.auth.signInWithOtp({
       email: email.trim().toLowerCase(),
       options: {
         // Optional: customize email template
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
+        ...(siteUrl && { emailRedirectTo: `${siteUrl}/dashboard` }),
       },
     })
 
