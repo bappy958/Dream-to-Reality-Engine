@@ -1,4 +1,7 @@
 {
     "files.refactoring.autoSave": false,
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cSpell.words": [
+        "esline"
+    ]
 }
